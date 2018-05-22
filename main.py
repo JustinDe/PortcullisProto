@@ -12,13 +12,14 @@ GREEN  = (000, 255, 000)
 RED    = (255, 000, 000)
 YELLOW = (255, 255, 000)
 ORANGE = (255, 165, 000)
+PURPLE = (255, 000 ,255)
 
 alpha = {1 : 'A', 2 : 'B', 3 : 'C', 4 : 'D', 5 : 'E', 6 : 'F'}
 
 grid = True
-f4key=False
-altkey=False
-exitcondition=False
+f4key = False
+altkey = False
+exitcondition = False
 
 doors = {
     # Horizontal
@@ -39,7 +40,7 @@ doors = {
     'C3': {'status': 'C', 'coord':((325,300),(375,300)), 'set': 'alpha'},
     'C4': {'status': 'C', 'coord':((325,400),(375,400)), 'set': 'alpha'},
     'C5': {'status': 'C', 'coord':((325,500),(375,500)), 'set': 'alpha'},
-    'C6': {'status': 'O', 'coord':((325,600),(375,600)), 'set': 'alpha'},
+    'C6': {'status': 'X', 'coord':((325,600),(375,600)), 'set': 'alpha'},
     'D1': {'status': 'W', 'coord':((425,100),(475,100)), 'set': 'alpha'},
     'D2': {'status': 'C', 'coord':((425,200),(475,200)), 'set': 'alpha'},
     'D3': {'status': 'C', 'coord':((425,300),(475,300)), 'set': 'alpha'},
@@ -53,7 +54,7 @@ doors = {
     'E5': {'status': 'C', 'coord':((525,500),(575,500)), 'set': 'alpha'},
     'E6': {'status': 'W', 'coord':((525,600),(575,600)), 'set': 'alpha'},
     # Vertical
-    '1A': {'status': 'O', 'coord':((100,125),(100,175)), 'set': 'alpha'},
+    '1A': {'status': 'X', 'coord':((100,125),(100,175)), 'set': 'alpha'},
     '2A': {'status': 'W', 'coord':((100,225),(100,275)), 'set': 'alpha'},
     '3A': {'status': 'W', 'coord':((100,325),(100,375)), 'set': 'alpha'},
     '4A': {'status': 'W', 'coord':((100,425),(100,475)), 'set': 'alpha'},
@@ -85,6 +86,38 @@ doors = {
     '5F': {'status': 'W', 'coord':((600,525),(600,575)), 'set': 'alpha'},
 }
 
+sets = {
+    'alpha': []
+}
+
+def drawDoor(door, color):
+    if door[0].isdigit():
+        pygame.draw.line(screen, color, (doors[door]['coord'][0][0], doors[door]['coord'][0][1]-2), (doors[door]['coord'][1][0], doors[door]['coord'][1][1]-2), 5)
+    else:
+        pygame.draw.line(screen, color, (doors[door]['coord'][0][0]-2, doors[door]['coord'][0][1]), (doors[door]['coord'][1][0]-2, doors[door]['coord'][1][1]), 5)
+
+def doorClick():
+        mouse = pygame.mouse.get_pos()
+        for door in doors.keys():
+            if door[0].isdigit(): # Vertical
+                if doors[door]['coord'][0][0]+10 > mouse[0] > doors[door]['coord'][0][0]-5 and doors[door]['coord'][0][1]+50 > mouse[1] > doors[door]['coord'][0][1]:
+                    if doors[door]['status'] != 'W':
+                        if doors[door]['status'] == 'C':
+                            doors[door]['status'] = 'O'
+                        else:
+                            doors[door]['status'] = 'C'
+                    print 'clicked on door %s' % (door)
+                    break
+            else:
+                if doors[door]['coord'][0][0]+50 > mouse[0] > doors[door]['coord'][0][0] and doors[door]['coord'][0][1]+10 > mouse[1] > doors[door]['coord'][0][1]-5:
+                    if doors[door]['status'] != 'W':
+                        if doors[door]['status'] == 'C':
+                            doors[door]['status'] = 'O'
+                        else:
+                            doors[door]['status'] = 'C'
+                    print 'clicked on door %s' % (door)
+                    break
+
 while not exitcondition:
     for event in pygame.event.get():
     # Close game on alt+f4---------
@@ -100,6 +133,8 @@ while not exitcondition:
                 altkey=False
             elif event.key==pygame.K_F4:
                 f4key=False
+        if event.type == pygame.MOUSEBUTTONUP:
+            doorClick();
     if altkey and f4key:
         exitcondition=True
     # END -------------------------
@@ -110,22 +145,19 @@ while not exitcondition:
             screen.blit(font.render(alpha[i], True, WHITE),((i*100)-5, 70)) # Alpha characters
             pygame.draw.line(screen, WHITE, [100, i*100], [600,i*100], 1) # Horizontal
             screen.blit(font.render(str(i), True, WHITE),(80, (i*100)-10)) # Digits
-    
-    def drawDoor(door, color):
-        pygame.draw.line(screen, color, doors[door]['coord'][0], doors[door]['coord'][1], 1)
 
-    # Testing -----------------------
     for door in doors.keys():
         COLOR = (0,0,0)
-        if doors[door]['status'] == 'C': # Closed Door
+        if doors[door]['status'].upper() == 'C': # Closed Door
             COLOR = RED
-        elif doors[door]['status'] == 'O': # Open Door
+        elif doors[door]['status'].upper() == 'O': # Open Door
             COLOR = GREEN
-        elif doors[door]['status'] == 'W': # Wall
+        elif doors[door]['status'].upper() == 'W': # Wall
             COLOR = WHITE
+        elif doors[door]['status'].upper() == 'X': # Exit
+            COLOR = PURPLE
         else:
             COLOR = ORANGE
         drawDoor(door, COLOR)
-    # End-Testing -------------------
-    
+
     pygame.display.flip()
