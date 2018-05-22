@@ -31,8 +31,8 @@ doors = {
     'A6': {'status': 'W', 'coord':((125,600),(175,600)), 'set': 'omega'},
     'B1': {'status': 'W', 'coord':((225,100),(275,100)), 'set': 'omega'},
     'B2': {'status': 'C', 'coord':((225,200),(275,200)), 'set': 'alpha'},
-    'B3': {'status': 'C', 'coord':((225,300),(275,300)), 'set': 'alpha'},
-    'B4': {'status': 'C', 'coord':((225,400),(275,400)), 'set': 'alpha'},
+    'B3': {'status': 'C', 'coord':((225,300),(275,300)), 'set': 'beta'},
+    'B4': {'status': 'C', 'coord':((225,400),(275,400)), 'set': 'beta'},
     'B5': {'status': 'C', 'coord':((225,500),(275,500)), 'set': 'alpha'},
     'B6': {'status': 'W', 'coord':((225,600),(275,600)), 'set': 'omega'},
     'C1': {'status': 'W', 'coord':((325,100),(375,100)), 'set': 'omega'},
@@ -43,7 +43,7 @@ doors = {
     'C6': {'status': 'X', 'coord':((325,600),(375,600)), 'set': 'omega'},
     'D1': {'status': 'W', 'coord':((425,100),(475,100)), 'set': 'omega'},
     'D2': {'status': 'C', 'coord':((425,200),(475,200)), 'set': 'alpha'},
-    'D3': {'status': 'C', 'coord':((425,300),(475,300)), 'set': 'alpha'},
+    'D3': {'status': 'C', 'coord':((425,300),(475,300)), 'set': 'beta'},
     'D4': {'status': 'C', 'coord':((425,400),(475,400)), 'set': 'alpha'},
     'D5': {'status': 'C', 'coord':((425,500),(475,500)), 'set': 'alpha'},
     'D6': {'status': 'W', 'coord':((425,600),(475,600)), 'set': 'omega'},
@@ -51,7 +51,7 @@ doors = {
     'E2': {'status': 'C', 'coord':((525,200),(575,200)), 'set': 'alpha'},
     'E3': {'status': 'C', 'coord':((525,300),(575,300)), 'set': 'alpha'},
     'E4': {'status': 'C', 'coord':((525,400),(575,400)), 'set': 'alpha'},
-    'E5': {'status': 'C', 'coord':((525,500),(575,500)), 'set': 'alpha'},
+    'E5': {'status': 'C', 'coord':((525,500),(575,500)), 'set': 'beta'},
     'E6': {'status': 'W', 'coord':((525,600),(575,600)), 'set': 'omega'},
     # Vertical
     '1A': {'status': 'X', 'coord':((100,125),(100,175)), 'set': 'omega'},
@@ -59,7 +59,7 @@ doors = {
     '3A': {'status': 'W', 'coord':((100,325),(100,375)), 'set': 'omega'},
     '4A': {'status': 'W', 'coord':((100,425),(100,475)), 'set': 'omega'},
     '5A': {'status': 'W', 'coord':((100,525),(100,575)), 'set': 'omega'},
-    '1B': {'status': 'C', 'coord':((200,125),(200,175)), 'set': 'alpha'},
+    '1B': {'status': 'C', 'coord':((200,125),(200,175)), 'set': 'beta'},
     '2B': {'status': 'C', 'coord':((200,225),(200,275)), 'set': 'alpha'},
     '3B': {'status': 'C', 'coord':((200,325),(200,375)), 'set': 'alpha'},
     '4B': {'status': 'C', 'coord':((200,425),(200,475)), 'set': 'alpha'},
@@ -69,10 +69,10 @@ doors = {
     '3C': {'status': 'C', 'coord':((300,325),(300,375)), 'set': 'alpha'},
     '4C': {'status': 'C', 'coord':((300,425),(300,475)), 'set': 'alpha'},
     '5C': {'status': 'C', 'coord':((300,525),(300,575)), 'set': 'alpha'},
-    '1D': {'status': 'C', 'coord':((400,125),(400,175)), 'set': 'alpha'},
+    '1D': {'status': 'C', 'coord':((400,125),(400,175)), 'set': 'beta'},
     '2D': {'status': 'C', 'coord':((400,225),(400,275)), 'set': 'alpha'},
     '3D': {'status': 'C', 'coord':((400,325),(400,375)), 'set': 'alpha'},
-    '4D': {'status': 'C', 'coord':((400,425),(400,475)), 'set': 'alpha'},
+    '4D': {'status': 'C', 'coord':((400,425),(400,475)), 'set': 'beta'},
     '5D': {'status': 'C', 'coord':((400,525),(400,575)), 'set': 'alpha'},
     '1E': {'status': 'C', 'coord':((500,125),(500,175)), 'set': 'alpha'},
     '2E': {'status': 'C', 'coord':((500,225),(500,275)), 'set': 'alpha'},
@@ -107,12 +107,10 @@ def updateDoorStatus():
             COLOR = ORANGE
         drawDoor(door, COLOR)
 
-def updateSet(door, newStatus):
-    changeSet = doors[door]['set']
-    if newStatus != '':
-        for door in doors.keys():
-            if doors[door]['set'] == changeSet:
-                doors[door]['status'] = newStatus
+def updateSet(door, newStatus, changeSet):
+    for door in doors.keys():
+        if doors[door]['set'] == changeSet:
+            doors[door]['status'] = newStatus
     updateDoorStatus()
 
 def doorClick():
@@ -134,9 +132,11 @@ def doorClick():
                     else:
                         newStatus = 'C'
 
-                print 'updated door %s with status: %s' % (doorToUpdate, newStatus)
-                if newStatus != '': doors[doorToUpdate]['status'] = newStatus
-                updateSet(doorToUpdate, newStatus)
+                changeSet = doors[door]['set']
+                if newStatus != '': 
+                    doors[doorToUpdate]['status'] = newStatus
+                    updateSet(doorToUpdate, newStatus, changeSet)
+                    print 'door %s clicked - changing set: %s to status: %s' % (doorToUpdate, changeSet, newStatus,)
                 break
 
 if grid: # Displays grid as guide if enabled
