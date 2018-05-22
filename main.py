@@ -118,29 +118,26 @@ def updateSet(door, newStatus):
 def doorClick():
         mouse = pygame.mouse.get_pos()
         for door in doors.keys():
+            doorToUpdate = ''
             newStatus = ''
             if door[0].isdigit(): # Vertical
                 if doors[door]['coord'][0][0]+10 > mouse[0] > doors[door]['coord'][0][0]-5 and doors[door]['coord'][0][1]+50 > mouse[1] > doors[door]['coord'][0][1]:
-                    if doors[door]['status'] != 'W' and doors[door]['status'] != 'X':
-                        if doors[door]['status'] == 'C':
-                            newStatus = 'O'
-                        else:
-                            newStatus = 'C'
-                    print 'updated door %s with status: %s' % (door, newStatus)
-                    if newStatus != '': doors[door]['status'] = newStatus
-                    updateSet(door, newStatus)
-                    break
+                    doorToUpdate = door
             else: # Horizontal
                 if doors[door]['coord'][0][0]+50 > mouse[0] > doors[door]['coord'][0][0] and doors[door]['coord'][0][1]+10 > mouse[1] > doors[door]['coord'][0][1]-5:
-                    if doors[door]['status'] != 'W' and doors[door]['status'] != 'X':
-                        if doors[door]['status'] == 'C':
-                            newStatus = 'O'
-                        else:
-                            newStatus = 'C'
-                    print 'updated door %s with status: %s' % (door, newStatus)
-                    if newStatus != '': doors[door]['status'] = newStatus
-                    updateSet(door, newStatus)
-                    break
+                    doorToUpdate = door
+                    
+            if doorToUpdate != '':
+                if doors[doorToUpdate]['status'] != 'W' and doors[doorToUpdate]['status'] != 'X':
+                    if doors[door]['status'] == 'C':
+                        newStatus = 'O'
+                    else:
+                        newStatus = 'C'
+
+                print 'updated door %s with status: %s' % (doorToUpdate, newStatus)
+                if newStatus != '': doors[doorToUpdate]['status'] = newStatus
+                updateSet(doorToUpdate, newStatus)
+                break
 
 if grid: # Displays grid as guide if enabled
         for i in range(1,7):
