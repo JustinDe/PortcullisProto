@@ -23,42 +23,42 @@ exitcondition = False
 
 doors = {
     # Horizontal
-    'A1': {'status': 'W', 'coord':((125,100),(175,100)), 'set': 'alpha'},
+    'A1': {'status': 'W', 'coord':((125,100),(175,100)), 'set': 'omega'},
     'A2': {'status': 'C', 'coord':((125,200),(175,200)), 'set': 'alpha'},
     'A3': {'status': 'C', 'coord':((125,300),(175,300)), 'set': 'alpha'},
     'A4': {'status': 'C', 'coord':((125,400),(175,400)), 'set': 'alpha'},
     'A5': {'status': 'C', 'coord':((125,500),(175,500)), 'set': 'alpha'},
-    'A6': {'status': 'W', 'coord':((125,600),(175,600)), 'set': 'alpha'},
-    'B1': {'status': 'W', 'coord':((225,100),(275,100)), 'set': 'alpha'},
+    'A6': {'status': 'W', 'coord':((125,600),(175,600)), 'set': 'omega'},
+    'B1': {'status': 'W', 'coord':((225,100),(275,100)), 'set': 'omega'},
     'B2': {'status': 'C', 'coord':((225,200),(275,200)), 'set': 'alpha'},
     'B3': {'status': 'C', 'coord':((225,300),(275,300)), 'set': 'alpha'},
     'B4': {'status': 'C', 'coord':((225,400),(275,400)), 'set': 'alpha'},
     'B5': {'status': 'C', 'coord':((225,500),(275,500)), 'set': 'alpha'},
-    'B6': {'status': 'W', 'coord':((225,600),(275,600)), 'set': 'alpha'},
-    'C1': {'status': 'W', 'coord':((325,100),(375,100)), 'set': 'alpha'},
+    'B6': {'status': 'W', 'coord':((225,600),(275,600)), 'set': 'omega'},
+    'C1': {'status': 'W', 'coord':((325,100),(375,100)), 'set': 'omega'},
     'C2': {'status': 'C', 'coord':((325,200),(375,200)), 'set': 'alpha'},
     'C3': {'status': 'C', 'coord':((325,300),(375,300)), 'set': 'alpha'},
     'C4': {'status': 'C', 'coord':((325,400),(375,400)), 'set': 'alpha'},
     'C5': {'status': 'C', 'coord':((325,500),(375,500)), 'set': 'alpha'},
-    'C6': {'status': 'X', 'coord':((325,600),(375,600)), 'set': 'alpha'},
-    'D1': {'status': 'W', 'coord':((425,100),(475,100)), 'set': 'alpha'},
+    'C6': {'status': 'X', 'coord':((325,600),(375,600)), 'set': 'omega'},
+    'D1': {'status': 'W', 'coord':((425,100),(475,100)), 'set': 'omega'},
     'D2': {'status': 'C', 'coord':((425,200),(475,200)), 'set': 'alpha'},
     'D3': {'status': 'C', 'coord':((425,300),(475,300)), 'set': 'alpha'},
     'D4': {'status': 'C', 'coord':((425,400),(475,400)), 'set': 'alpha'},
     'D5': {'status': 'C', 'coord':((425,500),(475,500)), 'set': 'alpha'},
-    'D6': {'status': 'W', 'coord':((425,600),(475,600)), 'set': 'alpha'},
-    'E1': {'status': 'W', 'coord':((525,100),(575,100)), 'set': 'alpha'},
+    'D6': {'status': 'W', 'coord':((425,600),(475,600)), 'set': 'omega'},
+    'E1': {'status': 'W', 'coord':((525,100),(575,100)), 'set': 'omega'},
     'E2': {'status': 'C', 'coord':((525,200),(575,200)), 'set': 'alpha'},
     'E3': {'status': 'C', 'coord':((525,300),(575,300)), 'set': 'alpha'},
     'E4': {'status': 'C', 'coord':((525,400),(575,400)), 'set': 'alpha'},
     'E5': {'status': 'C', 'coord':((525,500),(575,500)), 'set': 'alpha'},
-    'E6': {'status': 'W', 'coord':((525,600),(575,600)), 'set': 'alpha'},
+    'E6': {'status': 'W', 'coord':((525,600),(575,600)), 'set': 'omega'},
     # Vertical
-    '1A': {'status': 'X', 'coord':((100,125),(100,175)), 'set': 'alpha'},
-    '2A': {'status': 'W', 'coord':((100,225),(100,275)), 'set': 'alpha'},
-    '3A': {'status': 'W', 'coord':((100,325),(100,375)), 'set': 'alpha'},
-    '4A': {'status': 'W', 'coord':((100,425),(100,475)), 'set': 'alpha'},
-    '5A': {'status': 'W', 'coord':((100,525),(100,575)), 'set': 'alpha'},
+    '1A': {'status': 'X', 'coord':((100,125),(100,175)), 'set': 'omega'},
+    '2A': {'status': 'W', 'coord':((100,225),(100,275)), 'set': 'omega'},
+    '3A': {'status': 'W', 'coord':((100,325),(100,375)), 'set': 'omega'},
+    '4A': {'status': 'W', 'coord':((100,425),(100,475)), 'set': 'omega'},
+    '5A': {'status': 'W', 'coord':((100,525),(100,575)), 'set': 'omega'},
     '1B': {'status': 'C', 'coord':((200,125),(200,175)), 'set': 'alpha'},
     '2B': {'status': 'C', 'coord':((200,225),(200,275)), 'set': 'alpha'},
     '3B': {'status': 'C', 'coord':((200,325),(200,375)), 'set': 'alpha'},
@@ -79,18 +79,11 @@ doors = {
     '3E': {'status': 'C', 'coord':((500,325),(500,375)), 'set': 'alpha'},
     '4E': {'status': 'C', 'coord':((500,425),(500,475)), 'set': 'alpha'},
     '5E': {'status': 'C', 'coord':((500,525),(500,575)), 'set': 'alpha'},
-    '1F': {'status': 'W', 'coord':((600,125),(600,175)), 'set': 'alpha'},
-    '2F': {'status': 'W', 'coord':((600,225),(600,275)), 'set': 'alpha'},
-    '3F': {'status': 'W', 'coord':((600,325),(600,375)), 'set': 'alpha'},
-    '4F': {'status': 'W', 'coord':((600,425),(600,475)), 'set': 'alpha'},
-    '5F': {'status': 'W', 'coord':((600,525),(600,575)), 'set': 'alpha'},
-}
-
-sets = {
-    'alpha': [],
-    'beta':  [],
-    'gamma': [],
-    'delta': [],
+    '1F': {'status': 'W', 'coord':((600,125),(600,175)), 'set': 'omega'},
+    '2F': {'status': 'W', 'coord':((600,225),(600,275)), 'set': 'omega'},
+    '3F': {'status': 'W', 'coord':((600,325),(600,375)), 'set': 'omega'},
+    '4F': {'status': 'W', 'coord':((600,425),(600,475)), 'set': 'omega'},
+    '5F': {'status': 'W', 'coord':((600,525),(600,575)), 'set': 'omega'},
 }
 
 def drawDoor(door, color):
@@ -114,28 +107,39 @@ def updateDoorStatus():
             COLOR = ORANGE
         drawDoor(door, COLOR)
 
+def updateSet(door, newStatus):
+    changeSet = doors[door]['set']
+    if newStatus != '':
+        for door in doors.keys():
+            if doors[door]['set'] == changeSet:
+                doors[door]['status'] = newStatus
+    updateDoorStatus()
+
 def doorClick():
         mouse = pygame.mouse.get_pos()
         for door in doors.keys():
+            newStatus = ''
             if door[0].isdigit(): # Vertical
                 if doors[door]['coord'][0][0]+10 > mouse[0] > doors[door]['coord'][0][0]-5 and doors[door]['coord'][0][1]+50 > mouse[1] > doors[door]['coord'][0][1]:
-                    if doors[door]['status'] != 'W':
+                    if doors[door]['status'] != 'W' and doors[door]['status'] != 'X':
                         if doors[door]['status'] == 'C':
-                            doors[door]['status'] = 'O'
+                            newStatus = 'O'
                         else:
-                            doors[door]['status'] = 'C'
-                    print 'clicked on door %s' % (door)
-                    updateDoorStatus()
+                            newStatus = 'C'
+                    print 'updated door %s with status: %s' % (door, newStatus)
+                    if newStatus != '': doors[door]['status'] = newStatus
+                    updateSet(door, newStatus)
                     break
-            else:
+            else: # Horizontal
                 if doors[door]['coord'][0][0]+50 > mouse[0] > doors[door]['coord'][0][0] and doors[door]['coord'][0][1]+10 > mouse[1] > doors[door]['coord'][0][1]-5:
                     if doors[door]['status'] != 'W' and doors[door]['status'] != 'X':
                         if doors[door]['status'] == 'C':
-                            doors[door]['status'] = 'O'
+                            newStatus = 'O'
                         else:
-                            doors[door]['status'] = 'C'
-                    print 'clicked on door %s' % (door)
-                    updateDoorStatus()
+                            newStatus = 'C'
+                    print 'updated door %s with status: %s' % (door, newStatus)
+                    if newStatus != '': doors[door]['status'] = newStatus
+                    updateSet(door, newStatus)
                     break
 
 if grid: # Displays grid as guide if enabled
