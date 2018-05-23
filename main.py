@@ -7,6 +7,7 @@ screen = pygame.display.set_mode((700, 700))
 font = pygame.font.SysFont("arial", 20)
 
 WHITE  = (255, 255, 255)
+GREY   = (240, 240, 240)
 BLUE   = (000, 000, 255)
 GREEN  = (000, 255, 000)
 RED    = (255, 000, 000)
@@ -84,6 +85,34 @@ doors = {
     '3F': {'status': 'W', 'coord':((600,325),(600,375)), 'set': 'omega'},
     '4F': {'status': 'W', 'coord':((600,425),(600,475)), 'set': 'omega'},
     '5F': {'status': 'W', 'coord':((600,525),(600,575)), 'set': 'omega'},
+}
+
+playerLocations = {
+    'A1': {'coord': (140, 140, 20, 20)},
+    'A2': {'coord': (140, 240, 20, 20)},
+    'A3': {'coord': (140, 340, 20, 20)},
+    'A4': {'coord': (140, 440, 20, 20)},
+    'A5': {'coord': (140, 540, 20, 20)},
+    'B1': {'coord': (240, 140, 20, 20)},
+    'B2': {'coord': (240, 240, 20, 20)},
+    'B3': {'coord': (240, 340, 20, 20)},
+    'B4': {'coord': (240, 440, 20, 20)},
+    'B5': {'coord': (240, 540, 20, 20)},
+    'C1': {'coord': (340, 140, 20, 20)},
+    'C2': {'coord': (340, 240, 20, 20)},
+    'C3': {'coord': (340, 340, 20, 20)},
+    'C4': {'coord': (340, 440, 20, 20)},
+    'C5': {'coord': (340, 540, 20, 20)},
+    'D1': {'coord': (440, 140, 20, 20)},
+    'D2': {'coord': (440, 240, 20, 20)},
+    'D3': {'coord': (440, 340, 20, 20)},
+    'D4': {'coord': (440, 440, 20, 20)},
+    'D5': {'coord': (440, 540, 20, 20)},
+    'E1': {'coord': (540, 140, 20, 20)},
+    'E2': {'coord': (540, 240, 20, 20)},
+    'E3': {'coord': (540, 340, 20, 20)},
+    'E4': {'coord': (540, 440, 20, 20)},
+    'E5': {'coord': (540, 540, 20, 20)},
 }
 
 def drawDoor(door, color):
@@ -166,5 +195,8 @@ while not exitcondition:
             doorClick();
     if altkey and f4key:
         exitcondition=True
+
+    for loc in playerLocations.keys():
+        pygame.draw.rect(screen, GREY, playerLocations[loc]['coord']) #Player
 
     pygame.display.flip()
