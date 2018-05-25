@@ -118,32 +118,31 @@ playerLocations = {
 }
 
 cells = {
-    'A1': {'N':'A1', 'S':'A2', 'W': '1B', 'E':'1A'},
-    'A2': {'N':'A2', 'S':'A3', 'W': '2B', 'E':'2A'},
-    'A3': {'N':'A3', 'S':'A4', 'W': '3B', 'E':'3A'},
-    'A4': {'N':'A4', 'S':'A5', 'W': '4B', 'E':'4A'},
-    'A5': {'N':'A5', 'S':'A6', 'W': '5B', 'E':'5A'},
-    'A5': {'N':'A5', 'S':'A6', 'W': '5B', 'E':'5A'},
-    'B1': {'N':'B1', 'S':'B2', 'W': '1C', 'E':'1B'},
-    'B2': {'N':'B2', 'S':'B3', 'W': '2C', 'E':'2B'},
-    'B3': {'N':'B3', 'S':'B4', 'W': '3C', 'E':'3B'},
-    'B4': {'N':'B4', 'S':'B5', 'W': '4C', 'E':'4B'},
-    'B5': {'N':'B5', 'S':'B6', 'W': '5C', 'E':'5B'},
-    'C1': {'N':'C1', 'S':'C2', 'W': '1D', 'E':'1C'},
-    'C2': {'N':'C2', 'S':'C3', 'W': '2D', 'E':'2C'},
-    'C3': {'N':'C3', 'S':'C4', 'W': '3D', 'E':'3C'},
-    'C4': {'N':'C4', 'S':'C5', 'W': '4D', 'E':'4C'},
-    'C5': {'N':'C5', 'S':'C6', 'W': '5D', 'E':'5C'},
-    'D1': {'N':'D1', 'S':'D2', 'W': '1E', 'E':'1D'},
-    'D2': {'N':'D2', 'S':'D3', 'W': '2E', 'E':'2D'},
-    'D3': {'N':'D3', 'S':'D4', 'W': '3E', 'E':'3D'},
-    'D4': {'N':'D4', 'S':'D5', 'W': '4E', 'E':'4D'},
-    'D5': {'N':'D5', 'S':'D6', 'W': '5E', 'E':'5D'},
-    'E1': {'N':'E1', 'S':'E2', 'W': '1F', 'E':'1E'},
-    'E2': {'N':'E2', 'S':'E3', 'W': '2F', 'E':'2E'},
-    'E3': {'N':'E3', 'S':'E4', 'W': '3F', 'E':'3E'},
-    'E4': {'N':'E4', 'S':'E5', 'W': '4F', 'E':'4E'},
-    'E5': {'N':'E5', 'S':'E6', 'W': '5F', 'E':'5E'},
+    'A1': {'N':('A1','XX'), 'S':('A2','A2'), 'W': ('1B','XX'), 'E':('1A','B1')},
+    'A2': {'N':('A2','A1'), 'S':('A3','A3'), 'W': ('2B','XX'), 'E':('2A','B2')},
+    'A3': {'N':('A3','A2'), 'S':('A4','A4'), 'W': ('3B','XX'), 'E':('3A','B3')},
+    'A4': {'N':('A4','A3'), 'S':('A5','A5'), 'W': ('4B','XX'), 'E':('4A','B4')},
+    'A5': {'N':('A5','A4'), 'S':('A6','XX'), 'W': ('5B','XX'), 'E':('5A','B5')},
+    'B1': {'N':('B1','XX'), 'S':('B2','B2'), 'W': ('1C','A1'), 'E':('1B','C1')},
+    'B2': {'N':('B2','B1'), 'S':('B3','B3'), 'W': ('2C','A2'), 'E':('2B','C2')},
+    'B3': {'N':('B3','B2'), 'S':('B4','B4'), 'W': ('3C','A3'), 'E':('3B','C3')},
+    'B4': {'N':('B4','B3'), 'S':('B5','B5'), 'W': ('4C','A4'), 'E':('4B','C4')},
+    'B5': {'N':('B5','B4'), 'S':('B6','XX'), 'W': ('5C','A5'), 'E':('5B','C5')},
+    'C1': {'N':('C1','XX'), 'S':('C2','C2'), 'W': ('1D','B1'), 'E':('1C','D1')},
+    'C2': {'N':('C2','C1'), 'S':('C3','C3'), 'W': ('2D','B2'), 'E':('2C','D2')},
+    'C3': {'N':('C3','C2'), 'S':('C4','C4'), 'W': ('3D','B3'), 'E':('3C','D3')},
+    'C4': {'N':('C4','C3'), 'S':('C5','C5'), 'W': ('4D','B4'), 'E':('4C','D4')},
+    'C5': {'N':('C5','C4'), 'S':('C6','XX'), 'W': ('5D','B5'), 'E':('5C','D5')},
+    'D1': {'N':('D1','XX'), 'S':('D2','D2'), 'W': ('1E','C1'), 'E':('1D','E1')},
+    'D2': {'N':('D2','D1'), 'S':('D3','D3'), 'W': ('2E','C2'), 'E':('2D','E2')},
+    'D3': {'N':('D3','D2'), 'S':('D4','D4'), 'W': ('3E','C3'), 'E':('3D','E3')},
+    'D4': {'N':('D4','D3'), 'S':('D5','D5'), 'W': ('4E','C4'), 'E':('4D','E4')},
+    'D5': {'N':('D5','D4'), 'S':('D6','XX'), 'W': ('5E','C5'), 'E':('5D','E5')},
+    'E1': {'N':('E1','XX'), 'S':('E2','E2'), 'W': ('1F','D1'), 'E':('1E','XX')},
+    'E2': {'N':('E2','E1'), 'S':('E3','E3'), 'W': ('2F','D2'), 'E':('2E','XX')},
+    'E3': {'N':('E3','E2'), 'S':('E4','E4'), 'W': ('3F','D3'), 'E':('3E','XX')},
+    'E4': {'N':('E4','E3'), 'S':('E5','E5'), 'W': ('4F','D4'), 'E':('4E','XX')},
+    'E5': {'N':('E5','E4'), 'S':('E6','XX'), 'W': ('5F','D5'), 'E':('5E','XX')},
 }
 
 def drawDoor(door, color):
@@ -151,6 +150,9 @@ def drawDoor(door, color):
         pygame.draw.line(screen, color, (doors[door]['coord'][0][0], doors[door]['coord'][0][1]-2), (doors[door]['coord'][1][0], doors[door]['coord'][1][1]-2), 5)
     else:
         pygame.draw.line(screen, color, (doors[door]['coord'][0][0]-2, doors[door]['coord'][0][1]), (doors[door]['coord'][1][0]-2, doors[door]['coord'][1][1]), 5)
+
+def drawPlayer():
+    pygame.draw.rect(screen, BLUE, playerLocations[playerLoc]['coord'])
 
 def updateDoorStatus():
     for door in doors.keys(): # Redraw doors
@@ -197,7 +199,7 @@ def doorClick():
                     updateSet(doorToUpdate, newStatus, changeSet)
                 break
 
-def playerMovement(key):
+def playerMovement(key, playerLoc):
     dir = ''
     if key == pygame.K_UP:
         dir = 'N'
@@ -208,20 +210,25 @@ def playerMovement(key):
     if key == pygame.K_RIGHT:
         dir = 'E'
     if dir != '':
-        if doors[cells[playerLoc][dir]]['status'] == 'O':
-            print "moved %s" % (dir)
+        if doors[cells[playerLoc][dir][0]]['status'] == 'O':
+            if cells[playerLoc][dir][1] != 'XX':
+                playerLoc = cells[playerLoc][dir][1]
+    return playerLoc
+
+def drawPlayerSpaces():
+    for loc in playerLocations.keys():
+            pygame.draw.rect(screen, GREY, playerLocations[loc]['coord']) #Player Spaces
 
 if grid: # Displays grid as guide if enabled
-        for i in range(1,7):
-            pygame.draw.line(screen, WHITE, [i*100, 100], [i*100,600], 1) # Vertical
-            screen.blit(font.render(alpha[i], True, WHITE),((i*100)-5, 70)) # Alpha characters
-            pygame.draw.line(screen, WHITE, [100, i*100], [600,i*100], 1) # Horizontal
-            screen.blit(font.render(str(i), True, WHITE),(80, (i*100)-10)) # Digits
-        
-        for loc in playerLocations.keys():
-            pygame.draw.rect(screen, GREY, playerLocations[loc]['coord']) #Player
+    for i in range(1,7):
+        pygame.draw.line(screen, WHITE, [i*100, 100], [i*100,600], 1) # Vertical
+        screen.blit(font.render(alpha[i], True, WHITE),((i*100)-5, 70)) # Alpha characters
+        pygame.draw.line(screen, WHITE, [100, i*100], [600,i*100], 1) # Horizontal
+        screen.blit(font.render(str(i), True, WHITE),(80, (i*100)-10)) # Digits
+    drawPlayerSpaces()
 
 updateDoorStatus() # draw doors first time
+drawPlayer() # draw player first time
 
 while not exitcondition:
     for event in pygame.event.get():
@@ -240,7 +247,9 @@ while not exitcondition:
         if event.type == pygame.MOUSEBUTTONUP:
             doorClick()
         if event.type == pygame.KEYDOWN:
-            playerMovement(event.key)
+            playerLoc = playerMovement(event.key, playerLoc)
+            drawPlayerSpaces()
+            drawPlayer()
     if altkey and f4key:
         exitcondition=True
 
