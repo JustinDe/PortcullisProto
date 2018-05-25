@@ -22,6 +22,8 @@ f4key = False
 altkey = False
 exitcondition = False
 
+playerLoc = 'C5'
+
 doors = {
     # Horizontal
     'A1': {'status': 'W', 'coord':((125,100),(175,100)), 'set': 'omega'},
@@ -115,6 +117,35 @@ playerLocations = {
     'E5': {'coord': (540, 540, 20, 20)},
 }
 
+cells = {
+    'A1': {'N':'A1', 'S':'A2', 'W': '1B', 'E':'1A'},
+    'A2': {'N':'A2', 'S':'A3', 'W': '2B', 'E':'2A'},
+    'A3': {'N':'A3', 'S':'A4', 'W': '3B', 'E':'3A'},
+    'A4': {'N':'A4', 'S':'A5', 'W': '4B', 'E':'4A'},
+    'A5': {'N':'A5', 'S':'A6', 'W': '5B', 'E':'5A'},
+    'A5': {'N':'A5', 'S':'A6', 'W': '5B', 'E':'5A'},
+    'B1': {'N':'B1', 'S':'B2', 'W': '1C', 'E':'1B'},
+    'B2': {'N':'B2', 'S':'B3', 'W': '2C', 'E':'2B'},
+    'B3': {'N':'B3', 'S':'B4', 'W': '3C', 'E':'3B'},
+    'B4': {'N':'B4', 'S':'B5', 'W': '4C', 'E':'4B'},
+    'B5': {'N':'B5', 'S':'B6', 'W': '5C', 'E':'5B'},
+    'C1': {'N':'C1', 'S':'C2', 'W': '1D', 'E':'1C'},
+    'C2': {'N':'C2', 'S':'C3', 'W': '2D', 'E':'2C'},
+    'C3': {'N':'C3', 'S':'C4', 'W': '3D', 'E':'3C'},
+    'C4': {'N':'C4', 'S':'C5', 'W': '4D', 'E':'4C'},
+    'C5': {'N':'C5', 'S':'C6', 'W': '5D', 'E':'5C'},
+    'D1': {'N':'D1', 'S':'D2', 'W': '1E', 'E':'1D'},
+    'D2': {'N':'D2', 'S':'D3', 'W': '2E', 'E':'2D'},
+    'D3': {'N':'D3', 'S':'D4', 'W': '3E', 'E':'3D'},
+    'D4': {'N':'D4', 'S':'D5', 'W': '4E', 'E':'4D'},
+    'D5': {'N':'D5', 'S':'D6', 'W': '5E', 'E':'5D'},
+    'E1': {'N':'E1', 'S':'E2', 'W': '1F', 'E':'1E'},
+    'E2': {'N':'E2', 'S':'E3', 'W': '2F', 'E':'2E'},
+    'E3': {'N':'E3', 'S':'E4', 'W': '3F', 'E':'3E'},
+    'E4': {'N':'E4', 'S':'E5', 'W': '4F', 'E':'4E'},
+    'E5': {'N':'E5', 'S':'E6', 'W': '5F', 'E':'5E'},
+}
+
 def drawDoor(door, color):
     if door[0].isdigit():
         pygame.draw.line(screen, color, (doors[door]['coord'][0][0], doors[door]['coord'][0][1]-2), (doors[door]['coord'][1][0], doors[door]['coord'][1][1]-2), 5)
@@ -137,7 +168,6 @@ def updateDoorStatus():
         drawDoor(door, COLOR)
 
 def updateSet(door, newStatus, changeSet):
-    print "updateSet"
     for door in doors.keys():
         if doors[door]['set'] == changeSet:
             doors[door]['status'] = newStatus
@@ -165,8 +195,21 @@ def doorClick():
                 if doors[doorToUpdate]['status'] != 'W' and doors[doorToUpdate]['status'] != 'X' and doors[doorToUpdate]['status'] != '':
                     doors[doorToUpdate]['status'] = newStatus
                     updateSet(doorToUpdate, newStatus, changeSet)
-                    
                 break
+
+def playerMovement(key):
+    dir = ''
+    if key == pygame.K_UP:
+        dir = 'N'
+    if key == pygame.K_DOWN:
+        dir = 'S'
+    if key == pygame.K_LEFT:
+        dir = 'W'
+    if key == pygame.K_RIGHT:
+        dir = 'E'
+    if dir != '':
+        if doors[cells[playerLoc][dir]]['status'] == 'O':
+            print "moved %s" % (dir)
 
 if grid: # Displays grid as guide if enabled
         for i in range(1,7):
@@ -195,9 +238,10 @@ while not exitcondition:
             elif event.key==pygame.K_F4:
                 f4key=False
         if event.type == pygame.MOUSEBUTTONUP:
-            doorClick();
+            doorClick()
+        if event.type == pygame.KEYDOWN:
+            playerMovement(event.key)
     if altkey and f4key:
         exitcondition=True
-
 
     pygame.display.flip()
