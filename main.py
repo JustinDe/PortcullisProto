@@ -7,7 +7,7 @@ screen = pygame.display.set_mode((700, 700))
 font = pygame.font.SysFont("arial", 20)
 
 WHITE  = (255, 255, 255)
-GREY   = (240, 240, 240)
+GREY   = (100, 100, 100)
 BLUE   = (000, 000, 255)
 GREEN  = (000, 255, 000)
 RED    = (255, 000, 000)
@@ -137,6 +137,7 @@ def updateDoorStatus():
         drawDoor(door, COLOR)
 
 def updateSet(door, newStatus, changeSet):
+    print "updateSet"
     for door in doors.keys():
         if doors[door]['set'] == changeSet:
             doors[door]['status'] = newStatus
@@ -146,7 +147,6 @@ def doorClick():
         mouse = pygame.mouse.get_pos()
         for door in doors.keys():
             doorToUpdate = ''
-            newStatus = ''
             if door[0].isdigit(): # Vertical
                 if doors[door]['coord'][0][0]+10 > mouse[0] > doors[door]['coord'][0][0]-5 and doors[door]['coord'][0][1]+50 > mouse[1] > doors[door]['coord'][0][1]:
                     doorToUpdate = door
@@ -155,17 +155,17 @@ def doorClick():
                     doorToUpdate = door
                     
             if doorToUpdate != '':
-                if doors[doorToUpdate]['status'] != 'W' and doors[doorToUpdate]['status'] != 'X':
-                    if doors[door]['status'] == 'C':
-                        newStatus = 'O'
-                    else:
-                        newStatus = 'C'
+                if doors[door]['status'] == 'C':
+                    newStatus = 'O'
+                else:
+                    newStatus = 'C'
 
-                changeSet = doors[door]['set']
-                if newStatus != '': 
+                changeSet = doors[doorToUpdate]['set']
+                print 'door: %s, set: %s, status: %s' % (doorToUpdate, changeSet, newStatus)
+                if doors[doorToUpdate]['status'] != 'W' and doors[doorToUpdate]['status'] != 'X' and doors[doorToUpdate]['status'] != '':
                     doors[doorToUpdate]['status'] = newStatus
                     updateSet(doorToUpdate, newStatus, changeSet)
-                    print 'door %s clicked - changing set: %s to status: %s' % (doorToUpdate, changeSet, newStatus,)
+                    
                 break
 
 if grid: # Displays grid as guide if enabled
@@ -174,6 +174,9 @@ if grid: # Displays grid as guide if enabled
             screen.blit(font.render(alpha[i], True, WHITE),((i*100)-5, 70)) # Alpha characters
             pygame.draw.line(screen, WHITE, [100, i*100], [600,i*100], 1) # Horizontal
             screen.blit(font.render(str(i), True, WHITE),(80, (i*100)-10)) # Digits
+        
+        for loc in playerLocations.keys():
+            pygame.draw.rect(screen, GREY, playerLocations[loc]['coord']) #Player
 
 updateDoorStatus() # draw doors first time
 
@@ -196,7 +199,5 @@ while not exitcondition:
     if altkey and f4key:
         exitcondition=True
 
-    for loc in playerLocations.keys():
-        pygame.draw.rect(screen, GREY, playerLocations[loc]['coord']) #Player
 
     pygame.display.flip()
