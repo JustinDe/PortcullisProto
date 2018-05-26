@@ -6,6 +6,8 @@ pygame.display.set_caption('Portcullis prototyping')
 screen = pygame.display.set_mode((700, 700))
 font = pygame.font.SysFont("arial", 20)
 
+DEBUG = True
+
 WHITE  = (255, 255, 255)
 GREY   = (100, 100, 100)
 BLUE   = (000, 000, 255)
@@ -118,32 +120,36 @@ playerLocations = {
 }
 
 cells = {
-    'A1': {'NOR':('A1','XX'), 'SOU':('A2','A2'), 'WES': ('1B','XX'), 'EAS':('1A','B1')},
-    'A2': {'NOR':('A2','A1'), 'SOU':('A3','A3'), 'WES': ('2B','XX'), 'EAS':('2A','B2')},
-    'A3': {'NOR':('A3','A2'), 'SOU':('A4','A4'), 'WES': ('3B','XX'), 'EAS':('3A','B3')},
-    'A4': {'NOR':('A4','A3'), 'SOU':('A5','A5'), 'WES': ('4B','XX'), 'EAS':('4A','B4')},
-    'A5': {'NOR':('A5','A4'), 'SOU':('A6','XX'), 'WES': ('5B','XX'), 'EAS':('5A','B5')},
-    'B1': {'NOR':('B1','XX'), 'SOU':('B2','B2'), 'WES': ('1C','A1'), 'EAS':('1B','C1')},
-    'B2': {'NOR':('B2','B1'), 'SOU':('B3','B3'), 'WES': ('2C','A2'), 'EAS':('2B','C2')},
-    'B3': {'NOR':('B3','B2'), 'SOU':('B4','B4'), 'WES': ('3C','A3'), 'EAS':('3B','C3')},
-    'B4': {'NOR':('B4','B3'), 'SOU':('B5','B5'), 'WES': ('4C','A4'), 'EAS':('4B','C4')},
-    'B5': {'NOR':('B5','B4'), 'SOU':('B6','XX'), 'WES': ('5C','A5'), 'EAS':('5B','C5')},
-    'C1': {'NOR':('C1','XX'), 'SOU':('C2','C2'), 'WES': ('1D','B1'), 'EAS':('1C','D1')},
-    'C2': {'NOR':('C2','C1'), 'SOU':('C3','C3'), 'WES': ('2D','B2'), 'EAS':('2C','D2')},
-    'C3': {'NOR':('C3','C2'), 'SOU':('C4','C4'), 'WES': ('3D','B3'), 'EAS':('3C','D3')},
-    'C4': {'NOR':('C4','C3'), 'SOU':('C5','C5'), 'WES': ('4D','B4'), 'EAS':('4C','D4')},
-    'C5': {'NOR':('C5','C4'), 'SOU':('C6','XX'), 'WES': ('5D','B5'), 'EAS':('5C','D5')},
-    'D1': {'NOR':('D1','XX'), 'SOU':('D2','D2'), 'WES': ('1E','C1'), 'EAS':('1D','E1')},
-    'D2': {'NOR':('D2','D1'), 'SOU':('D3','D3'), 'WES': ('2E','C2'), 'EAS':('2D','E2')},
-    'D3': {'NOR':('D3','D2'), 'SOU':('D4','D4'), 'WES': ('3E','C3'), 'EAS':('3D','E3')},
-    'D4': {'NOR':('D4','D3'), 'SOU':('D5','D5'), 'WES': ('4E','C4'), 'EAS':('4D','E4')},
-    'D5': {'NOR':('D5','D4'), 'SOU':('D6','XX'), 'WES': ('5E','C5'), 'EAS':('5D','E5')},
-    'E1': {'NOR':('E1','XX'), 'SOU':('E2','E2'), 'WES': ('1F','D1'), 'EAS':('1E','XX')},
-    'E2': {'NOR':('E2','E1'), 'SOU':('E3','E3'), 'WES': ('2F','D2'), 'EAS':('2E','XX')},
-    'E3': {'NOR':('E3','E2'), 'SOU':('E4','E4'), 'WES': ('3F','D3'), 'EAS':('3E','XX')},
-    'E4': {'NOR':('E4','E3'), 'SOU':('E5','E5'), 'WES': ('4F','D4'), 'EAS':('4E','XX')},
-    'E5': {'NOR':('E5','E4'), 'SOU':('E6','XX'), 'WES': ('5F','D5'), 'EAS':('5E','XX')},
+    'A1': {'NOR':('A1','XX'), 'SOU':('A2','A2'), 'EAS': ('1B','B1'), 'WES':('1A','XX')},
+    'A2': {'NOR':('A2','A1'), 'SOU':('A3','A3'), 'EAS': ('2B','B2'), 'WES':('2A','XX')},
+    'A3': {'NOR':('A3','A2'), 'SOU':('A4','A4'), 'EAS': ('3B','B3'), 'WES':('3A','XX')},
+    'A4': {'NOR':('A4','A3'), 'SOU':('A5','A5'), 'EAS': ('4B','B4'), 'WES':('4A','XX')},
+    'A5': {'NOR':('A5','A4'), 'SOU':('A6','XX'), 'EAS': ('5B','B5'), 'WES':('5A','XX')},
+    'B1': {'NOR':('B1','XX'), 'SOU':('B2','B2'), 'EAS': ('1C','C1'), 'WES':('1B','A1')},
+    'B2': {'NOR':('B2','B1'), 'SOU':('B3','B3'), 'EAS': ('2C','C2'), 'WES':('2B','A2')},
+    'B3': {'NOR':('B3','B2'), 'SOU':('B4','B4'), 'EAS': ('3C','C3'), 'WES':('3B','A3')},
+    'B4': {'NOR':('B4','B3'), 'SOU':('B5','B5'), 'EAS': ('4C','C4'), 'WES':('4B','A4')},
+    'B5': {'NOR':('B5','B4'), 'SOU':('B6','XX'), 'EAS': ('5C','C5'), 'WES':('5B','A5')},
+    'C1': {'NOR':('C1','XX'), 'SOU':('C2','C2'), 'EAS': ('1D','D1'), 'WES':('1C','B1')},
+    'C2': {'NOR':('C2','C1'), 'SOU':('C3','C3'), 'EAS': ('2D','D2'), 'WES':('2C','B2')},
+    'C3': {'NOR':('C3','C2'), 'SOU':('C4','C4'), 'EAS': ('3D','D3'), 'WES':('3C','B3')},
+    'C4': {'NOR':('C4','C3'), 'SOU':('C5','C5'), 'EAS': ('4D','D4'), 'WES':('4C','B4')},
+    'C5': {'NOR':('C5','C4'), 'SOU':('C6','XX'), 'EAS': ('5D','D5'), 'WES':('5C','B5')},
+    'D1': {'NOR':('D1','XX'), 'SOU':('D2','D2'), 'EAS': ('1E','E1'), 'WES':('1D','C1')},
+    'D2': {'NOR':('D2','D1'), 'SOU':('D3','D3'), 'EAS': ('2E','E2'), 'WES':('2D','C2')},
+    'D3': {'NOR':('D3','D2'), 'SOU':('D4','D4'), 'EAS': ('3E','E3'), 'WES':('3D','C3')},
+    'D4': {'NOR':('D4','D3'), 'SOU':('D5','D5'), 'EAS': ('4E','E4'), 'WES':('4D','C4')},
+    'D5': {'NOR':('D5','D4'), 'SOU':('D6','XX'), 'EAS': ('5E','E5'), 'WES':('5D','C5')},
+    'E1': {'NOR':('E1','XX'), 'SOU':('E2','E2'), 'EAS': ('1F','XX'), 'WES':('1E','D1')},
+    'E2': {'NOR':('E2','E1'), 'SOU':('E3','E3'), 'EAS': ('2F','XX'), 'WES':('2E','D2')},
+    'E3': {'NOR':('E3','E2'), 'SOU':('E4','E4'), 'EAS': ('3F','XX'), 'WES':('3E','D3')},
+    'E4': {'NOR':('E4','E3'), 'SOU':('E5','E5'), 'EAS': ('4F','XX'), 'WES':('4E','D4')},
+    'E5': {'NOR':('E5','E4'), 'SOU':('E6','XX'), 'EAS': ('5F','XX'), 'WES':('5E','D5')},
 }
+
+def log(msg):
+    if DEBUG:
+        print ":> %s" % (str(msg))
 
 def drawDoor(door, color):
     if door[0].isdigit():
@@ -185,22 +191,21 @@ def doorClick():
             else: # Horizontal
                 if doors[door]['coord'][0][0]+50 > mouse[0] > doors[door]['coord'][0][0] and doors[door]['coord'][0][1]+10 > mouse[1] > doors[door]['coord'][0][1]-5:
                     doorToUpdate = door
-                    
-            if doorToUpdate != '':
-                if doors[door]['status'] == 'C':
-                    newStatus = 'O'
-                else:
-                    newStatus = 'C'
+            for dir in cells[playerLoc].keys():
+                if cells[playerLoc][dir][0] == doorToUpdate:
+                    if doors[door]['status'] == 'C':
+                        newStatus = 'O'
+                    else:
+                        newStatus = 'C'
 
-                changeSet = doors[doorToUpdate]['set']
-                print 'door: %s, set: %s, status: %s' % (doorToUpdate, changeSet, newStatus)
-                if doors[doorToUpdate]['status'] != 'W' and doors[doorToUpdate]['status'] != 'X' and doors[doorToUpdate]['status'] != '':
-                    doors[doorToUpdate]['status'] = newStatus
-                    updateSet(doorToUpdate, newStatus, changeSet)
-                break
+                    changeSet = doors[doorToUpdate]['set']
+                    log('door: %s, set: %s, status: %s' % (doorToUpdate, changeSet, newStatus))
+                    if doors[doorToUpdate]['status'] != 'W' and doors[doorToUpdate]['status'] != 'X' and doors[doorToUpdate]['status'] != '':
+                        doors[doorToUpdate]['status'] = newStatus
+                        updateSet(doorToUpdate, newStatus, changeSet)
+                    break
 
 def playerMovement(key, playerLoc):
-    print "old loc: " + playerLoc
     dir = ''
     if key == pygame.K_UP:
         dir = 'NOR'
@@ -210,13 +215,10 @@ def playerMovement(key, playerLoc):
         dir = 'WES'
     if key == pygame.K_RIGHT:
         dir = 'EAS'
-    print dir
-    print doors[cells[playerLoc][dir][0]]['status']
     if dir != '':
         if doors[cells[playerLoc][dir][0]]['status'] == 'O':
             if cells[playerLoc][dir][1] != 'XX':
                 playerLoc = cells[playerLoc][dir][1]
-                print "new loc: " + playerLoc
     return playerLoc
 
 def drawPlayerSpaces():
