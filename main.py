@@ -42,7 +42,7 @@ doors = {
     'B6': {'status': 'W', 'coord':((225,600),(275,600)), 'set': 'omega'},
     'C1': {'status': 'W', 'coord':((325,100),(375,100)), 'set': 'omega'},
     'C2': {'status': 'C', 'coord':((325,200),(375,200)), 'set': 'alpha'},
-    'C3': {'status': 'C', 'coord':((325,300),(375,300)), 'set': 'sigma'},
+    'C3': {'status': 'C', 'coord':((325,300),(375,300)), 'set': 'delta'},
     'C4': {'status': 'C', 'coord':((325,400),(375,400)), 'set': 'delta'},
     'C5': {'status': 'C', 'coord':((325,500),(375,500)), 'set': 'alpha'},
     'C6': {'status': 'X', 'coord':((325,600),(375,600)), 'set': 'omega'},
@@ -70,13 +70,13 @@ doors = {
     '4B': {'status': 'C', 'coord':((200,425),(200,475)), 'set': 'alpha'},
     '5B': {'status': 'C', 'coord':((200,525),(200,575)), 'set': 'gamma'},
     '1C': {'status': 'C', 'coord':((300,125),(300,175)), 'set': 'alpha'},
-    '2C': {'status': 'C', 'coord':((300,225),(300,275)), 'set': 'sigma'},
+    '2C': {'status': 'C', 'coord':((300,225),(300,275)), 'set': 'delta'},
     '3C': {'status': 'C', 'coord':((300,325),(300,375)), 'set': 'gamma'},
     '4C': {'status': 'C', 'coord':((300,425),(300,475)), 'set': 'alpha'},
     '5C': {'status': 'C', 'coord':((300,525),(300,575)), 'set': 'alpha'},
     '1D': {'status': 'C', 'coord':((400,125),(400,175)), 'set': 'beta'},
     '2D': {'status': 'C', 'coord':((400,225),(400,275)), 'set': 'alpha'},
-    '3D': {'status': 'C', 'coord':((400,325),(400,375)), 'set': 'sigma'},
+    '3D': {'status': 'C', 'coord':((400,325),(400,375)), 'set': 'delta'},
     '4D': {'status': 'C', 'coord':((400,425),(400,475)), 'set': 'beta'},
     '5D': {'status': 'C', 'coord':((400,525),(400,575)), 'set': 'alpha'},
     '1E': {'status': 'C', 'coord':((500,125),(500,175)), 'set': 'gamma'},
@@ -182,10 +182,16 @@ def updateDoorStatus():
             COLOR = ORANGE
         drawDoor(door, COLOR)
 
-def updateSet(door, newStatus, changeSet):
+def updateSet(newStatus, changeSet):
     for door in doors.keys():
         if doors[door]['set'] == changeSet:
             doors[door]['status'] = newStatus
+        if doors[door]['set'] == matchSets[changeSet]:
+            if newStatus == 'C':
+                doors[door]['status'] = 'O'
+            if newStatus == 'O':
+                doors[door]['status'] = 'C'
+
     updateDoorStatus()
 
 def doorClick():
@@ -209,7 +215,7 @@ def doorClick():
                     log('door: %s, set: %s, status: %s' % (doorToUpdate, changeSet, newStatus))
                     if doors[doorToUpdate]['status'] != 'W' and doors[doorToUpdate]['status'] != 'X' and doors[doorToUpdate]['status'] != '':
                         doors[doorToUpdate]['status'] = newStatus
-                        updateSet(doorToUpdate, newStatus, changeSet)
+                        updateSet(newStatus, changeSet)
                     break
 
 def playerMovement(key, playerLoc):
