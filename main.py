@@ -156,7 +156,7 @@ cells = {
 
 def log(msg):
     if DEBUG:
-        print ":> %s" % (str(msg))
+        print(":> %s" % (str(msg)))
 
 def drawDoor(door, color):
     if door[0].isdigit():
@@ -168,7 +168,7 @@ def drawPlayer():
     pygame.draw.rect(screen, BLUE, playerLocations[playerLoc]['coord'])
 
 def updateDoorStatus():
-    for door in doors.keys(): # Redraw doors
+    for door in list(doors.keys()): # Redraw doors
         COLOR = (0,0,0)
         if doors[door]['status'].upper() == 'C':   # Closed Door
             COLOR = RED
@@ -183,7 +183,7 @@ def updateDoorStatus():
         drawDoor(door, COLOR)
 
 def updateSet(newStatus, changeSet):
-    for door in doors.keys():
+    for door in list(doors.keys()):
         if doors[door]['set'] == changeSet:
             doors[door]['status'] = newStatus
         if doors[door]['set'] == matchSets[changeSet]:
@@ -196,7 +196,7 @@ def updateSet(newStatus, changeSet):
 
 def doorClick():
         mouse = pygame.mouse.get_pos()
-        for door in doors.keys():
+        for door in list(doors.keys()):
             doorToUpdate = ''
             if door[0].isdigit(): # Vertical
                 if doors[door]['coord'][0][0]+10 > mouse[0] > doors[door]['coord'][0][0]-5 and doors[door]['coord'][0][1]+50 > mouse[1] > doors[door]['coord'][0][1]:
@@ -204,7 +204,7 @@ def doorClick():
             else: # Horizontal
                 if doors[door]['coord'][0][0]+50 > mouse[0] > doors[door]['coord'][0][0] and doors[door]['coord'][0][1]+10 > mouse[1] > doors[door]['coord'][0][1]-5:
                     doorToUpdate = door
-            for dir in cells[playerLoc].keys():
+            for dir in list(cells[playerLoc].keys()):
                 if cells[playerLoc][dir][0] == doorToUpdate:
                     if doors[door]['status'] == 'C':
                         newStatus = 'O'
@@ -235,7 +235,7 @@ def playerMovement(key, playerLoc):
     return playerLoc
 
 def drawPlayerSpaces():
-    for loc in playerLocations.keys():
+    for loc in list(playerLocations.keys()):
             pygame.draw.rect(screen, GREY, playerLocations[loc]['coord']) #Player Spaces
 
 if grid: # Displays grid as guide if enabled
